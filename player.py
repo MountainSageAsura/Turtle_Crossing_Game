@@ -1,8 +1,7 @@
 from turtle import Turtle
 
-X_POSITION = 0
-Y_POSITION = -280
-MOVE_FORWARD_DISTANCE = 20
+STARTING_POSITION = (0, -280)
+MOVE_DISTANCE = 10
 FINISH_LINE_Y = 280
 
 class Player(Turtle):
@@ -15,13 +14,17 @@ class Player(Turtle):
         self.color("DarkSeaGreen3")
         self.penup()
         self.setheading(90)
-        self.goto(x=X_POSITION, y=Y_POSITION)
+        self.go_to_start()
 
-    def move(self):
-        self.forward(MOVE_FORWARD_DISTANCE)
-        # Detect collision with the wall
-        if self.ycor() >= FINISH_LINE_Y:
-            self.reset_turtle()
+    def go_up(self):
+        self.forward(MOVE_DISTANCE)
 
-    def reset_turtle(self):
-        self.goto(x=X_POSITION, y=Y_POSITION)
+    def go_to_start(self):
+        self.goto(STARTING_POSITION)
+
+    def is_at_finish_line(self):
+        if self.ycor() > FINISH_LINE_Y:
+            return True
+        else:
+            return False
+
